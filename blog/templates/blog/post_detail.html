@@ -1,0 +1,29 @@
+{% extends "blog/base.html" %} 
+
+{% block content %}
+  <div class="clearfix" style="margin-left: 100px; width: 55%; float:left;">
+    <div class="box" style="float:left; background-color:#edeff2; width: 90%;">
+      <h3 align="left" style="height: 40px;">{{ object.title }}</h3>
+      
+      <p>{{ object.content }}</p>
+      <hr>
+      <div style="width: 100%; height: auto; overflow: hidden; padding: 15px">
+        
+            <a href="{% url 'user_posts' object.author.username %}">
+              <img class="rounded-circle" style="float: left; width:40px; height:40px;" src="{{ post.author.profile.image.url }}">
+            </a>
+            <div style="width: 75%; float: left; padding-left: 20px;">
+              <a style="color: black;" href="{% url 'user_posts' object.author.username %}"><small>{{ post.author }}</small></a>
+            </div>
+            {% if  object.author == user %}
+              <div style="width: 75%; float: left; padding-left: 20px;" margin-top: 20px">
+                <a class="btn btn-secondary btn-sm mt-1 mb-1 mx-auto" href="{% url 'post_update' object.id %}">Update Post</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1 mx-auto" href="{% url 'post_delete' object.id %}">Delete</a>
+              </div>
+            {% endif %}
+          
+        <div style="float: right;"><small class="text-muted">{{ object.date_posted|date:'F d, Y' }}</small></div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
